@@ -1,0 +1,106 @@
+@model List<StockSmart.Models.Producto>
+
+@{
+    ViewData["Title"] = "Buscar Productos";
+}
+
+@section Styles {
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Inicializa la tabla de productos si es necesario
+        });
+    </script>
+}
+
+<br />
+<div class="row">
+    <div class="col">
+        <h1>Buscar Productos</h1>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <form asp-action="Index">
+            <div class="form-group row">
+                <label for="reference" class="col-sm-2 col-form-label">Referencia</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="reference" name="reference" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="productName" class="col-sm-2 col-form-label">Nombre del Producto</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="productName" name="productName" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="minPrice" class="col-sm-2 col-form-label">Precio M�nimo</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="minPrice" name="minPrice" step="0.01" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="maxPrice" class="col-sm-2 col-form-label">Precio M�ximo</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="maxPrice" name="maxPrice" step="0.01" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <table id="productos" class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="max-width: 10px;"><b>Referencia</b></th>
+                    <th style="width: 30px;"><b>Nombre del Producto</b></th>
+                    <th style="max-width: 15px;"><b>Categor�a</b></th>
+                    <th style="max-width: 10px;"><b>Precio</b></th>
+                    <th style="max-width: 10px;"><b>Stock</b></th>
+                    <th style="max-width: 25px;"><b></b></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProductID</td>
+                        <td>
+                            <a asp-controller="productos" asp-action="Ficha" asp-route-id="@item.ProductID">
+                                @item.ProductName
+                            </a>
+                        </td>
+                        <td>@item.CategoryID</td>
+                        <td class="text-end">
+                            @(item.UnitPrice == null ? "sin precio" : Convert.ToDecimal(item.UnitPrice).ToString("N2"))
+                        </td>
+                        <td class="text-end text-units" data-stock="@item.UnitsInStock" data-order="@item.UnitsOnOrder">
+                            <span data-bs-toggle="tooltip"
+                                  data-bs-placement="right"
+                                  data-bs-html="true"
+                                  title="<b>Stock:</b> @item.UnitsInStock <br /><b>Pedido:</b> @item.UnitsOnOrder">
+                                @item.UnitsInStock
+                            </span>
+                        </td>
+                        <td> </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <a asp-controller="productos" asp-action="Nuevo" class="btn btn-success">Nuevo Producto</a>
+    </div>
+</div>

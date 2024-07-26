@@ -1,0 +1,120 @@
+﻿@model IEnumerable<StockSmart.Models.Producto>
+
+@{
+    ViewData["Title"] = "Lista de Productos";
+}
+
+<style>
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-container {
+        max-height: 500px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-container thead th {
+            position: sticky;
+            top: 0;
+            background-color: #343a40;
+            color: #ffffff;
+            z-index: 1;
+        }
+
+        .table-container tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .table-container tbody tr:hover {
+            background-color: #e9ecef;
+        }
+
+    .search-form {
+        margin-bottom: 20px;
+    }
+
+        .search-form .form-control {
+            border-radius: 5px;
+        }
+
+        .search-form .btn-primary {
+            border-radius: 5px;
+        }
+</style>
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <a asp-action="Create" class="btn btn-primary">Crear Nuevo Producto</a>
+        </div>
+        <div class="col-md-6">
+            <form asp-action="Index" method="get" class="search-form">
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                        <input type="text" name="reference" class="form-control" placeholder="Referencia" />
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <input type="text" name="productName" class="form-control" placeholder="Nombre del Producto" />
+                    </div>
+                    <div class="col-md-2 mb-2">
+                        <input type="number" name="minPrice" class="form-control" placeholder="Precio mínimo" step="0.01" />
+                    </div>
+                    <div class="col-md-2 mb-2">
+                        <input type="number" name="maxPrice" class="form-control" placeholder="Precio máximo" step="0.01" />
+                    </div>
+                    <div class="col-md-2 mb-2">
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.ProductID)</th>
+                    <th>@Html.DisplayNameFor(model => model.ProductName)</th>
+                    <th>@Html.DisplayNameFor(model => model.UnitPrice)</th>
+                    <th>@Html.DisplayNameFor(model => model.UnitsInStock)</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.ProductID)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.UnitPrice)</td>
+                        <td>@Html.DisplayFor(modelItem => item.UnitsInStock)</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ProductID" class="btn btn-sm btn-warning">Editar</a>
+                            <a asp-action="Details" asp-route-id="@item.ProductID" class="btn btn-sm btn-info">Detalles</a>
+                            <a asp-action="Delete" asp-route-id="@item.ProductID" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

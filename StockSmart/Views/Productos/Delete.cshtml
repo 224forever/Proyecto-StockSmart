@@ -1,0 +1,15 @@
+﻿@model StockSmart.Models.Producto
+
+@{
+    ViewData["Title"] = "Eliminar Producto";
+}
+
+<h1>Eliminar Producto</h1>
+
+<h3>¿Estás seguro de que deseas eliminar el producto @Model.ProductName?</h3>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="ProductID" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

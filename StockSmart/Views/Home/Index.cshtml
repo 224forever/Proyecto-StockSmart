@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Proyecto StockSmart de Paula y Jose";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua:wght@700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock:wght@700&display=swap" />
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: #e6e6e6;
+            overflow: hidden;
+        }
+
+        .title-container {
+            margin-top: 150px;
+            padding: 30px;
+            background-color: rgba(27, 27, 27, 0.8); /* Fondo oscuro semi-transparente */
+            border-radius: 15px;
+            display: inline-block;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .title {
+            font-family: 'Uncial Antiqua', cursive;
+            font-size: 4rem;
+            color: #f9c74f;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.8);
+            margin: 0;
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-family: 'Gloock', serif;
+            font-size: 1.8rem;
+            color: #a8a8a8;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images6.alphacoders.com/132/1326541.png') no-repeat center center fixed;
+            background-size: cover;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <div class="title-container">
+        <h1 class="title">Proyecto StockSmart</h1>
+        <p class="subtitle">De Paula y Jose</p>
+    </div>
+</body>
+</html>

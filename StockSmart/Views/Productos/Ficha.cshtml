@@ -1,0 +1,77 @@
+﻿@model StockSmart.Models.Producto
+
+@{
+    var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+    var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+}
+
+@section Styles {}
+
+@section Scripts {
+    <script type="text/javascript">
+        let controller = "@controller";
+        let action = "@action";
+
+        $(document).ready(function () {
+            // App.Page.Products.File.OnLoad();
+        });
+    </script>
+}
+
+<br />
+<div class="row">
+    <div class="col">
+        <h1>Ficha de Producto</h1>
+        <hr />
+        <br />
+    </div>
+</div>
+
+<form asp-controller="@controller" asp-action="@action" asp-route-id="@Model.ProductID" method="post">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    @if (action == "nuevo")
+                    {
+                    <h4><b>Nuevo Producto</b></h4>
+                    }
+                    else
+                    {
+                    <h4><b>@Model.ProductName</b></h4>
+                    }
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label" for="ProductID">Referencia</label>
+                        <input type="text" class="form-control" id="ProductID" name="ProductID" value="@Model.ProductID" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="ProductName">Descripción</label>
+                        <input type="text" class="form-control" id="ProductName" name="ProductName" value="@Model.ProductName" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="CategoryID">Categoría</label>
+                        <input type="text" class="form-control" id="CategoryID" name="CategoryID" value="@Model.CategoryID" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="UnitPrice">Precio</label>
+                        <input type="text" class="form-control" id="UnitPrice" name="UnitPrice" value="@Model.UnitPrice" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="UnitsInStock">Stock</label>
+                        <input type="text" class="form-control" id="UnitsInStock" name="UnitsInStock" value="@Model.UnitsInStock" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="UnitsOnOrder">Pedido</label>
+                        <input type="text" class="form-control" id="UnitsOnOrder" name="UnitsOnOrder" value="@Model.UnitsOnOrder" />
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a asp-controller="productos" asp-action="Index" class="btn btn-secondary">Volver</a>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
